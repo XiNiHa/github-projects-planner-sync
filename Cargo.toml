@@ -1,0 +1,10 @@
+[package]
+name = "github-projects-planner-sync"
+version = "0.1.0"
+authors = ["XiNiHa <me@xiniha.dev>"]
+edition = "2021"
+description = "Sync between GitHub Projects and Planner"
+repository = "https://github.com/XiNiHa/github-projects-planner-sync"
+license = "MIT"
+
+[dependencies]
