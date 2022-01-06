@@ -1,3 +1,9 @@
+github:
+  api_key: <API_KEY>
+  organization_name: example-org
+  project_no: 1
+  bucket_param_name: Status
+
 tracked_actions:
   - opened
   - edited

@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 use webhook::Trackable;
 
 pub mod webhook;
+pub mod github_api;
 pub mod response;
 
 lazy_static::lazy_static! {
@@ -16,6 +17,8 @@ lazy_static::lazy_static! {
 
 #[derive(Serialize, Deserialize)]
 pub struct AppConfig {
+    pub github: github_api::GitHubConfig,
+
     pub tracked_actions: Vec<String>,
     pub tracked_labels: Vec<String>,
 }
@@ -36,6 +39,14 @@ pub async fn webhook_handler(payload: webhook::WebhookPayload) -> ApiResponse {
     if !is_tracked {
         return ApiResponse::NotTargeted;
     }
+
+    let github_project_state = match github_api::get_project_state().await {
+        Ok(state) => state,
+        Err(err) => return ApiResponse::GitHubApiError(err)
+    };
+
+    // TODO: remove this
+    println!("{}", serde_json::to_string_pretty(&github_project_state).unwrap());
 
     todo!()
 }

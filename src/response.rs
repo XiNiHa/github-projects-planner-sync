@@ -2,6 +2,8 @@ use std::borrow::Cow;
 
 use serde::Serialize;
 
+use crate::github_api::GitHubApiError;
+
 #[derive(Serialize)]
 pub struct SerializableResponse<'a> {
     #[serde(skip)]
@@ -26,6 +28,7 @@ pub enum ApiResponse {
     NoBodyFound,
     UnknownInput,
     NotTargeted,
+    GitHubApiError(GitHubApiError),
 }
 
 impl<'a> ApiResponse {
@@ -45,6 +48,11 @@ impl<'a> ApiResponse {
                 200,
                 Cow::Borrowed("not_targeted"),
                 Cow::Borrowed("Not targeted to be tracked, skipping"),
+            ),
+            ApiResponse::GitHubApiError(err) => (
+                500,
+                Cow::Borrowed("github_api_error"),
+                Cow::Owned(format!("Error occured while communicating with GitHub API: {:?}", err)),
             ),
         };
 
