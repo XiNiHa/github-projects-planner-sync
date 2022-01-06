@@ -1,0 +1,12 @@
+tracked_actions:
+  - opened
+  - edited
+  - deleted
+  - closed
+  - reopened
+  - assigned
+  - unassigned
+  - labeled
+  - unlabled
+tracked_labels:
+  - 동기화됨

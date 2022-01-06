@@ -7,4 +7,16 @@ description = "Sync between GitHub Projects and Planner"
 repository = "https://github.com/XiNiHa/github-projects-planner-sync"
 license = "MIT"
 
+[[bin]]
+name = "bootstrap"
+path = "src/lambda/main.rs"
+
 [dependencies]
+tokio = "1.15.0"
+lambda_http = "0.4.1"
+axum = "0.4.3"
+serde = "1.0.133"
+serde_json = "1.0.74"
+serde_derive = "1.0.133"
+config = { version = "0.11.0", features = ["yaml"] }
+lazy_static = "1.4.0"
